@@ -20,30 +20,18 @@ const image = (file) => `/assets/photobook/${file}`
 
 export const projects = [
   {
-    slug: 'ondeyo-primary-school',
-    name: 'Ondeyo Primary School storey block',
+    slug: 'historic-storey-classroom-buildings',
+    name: 'Historic storey classroom buildings',
     location: 'Sabatia Constituency',
     category: 'Education',
-    excerpt: 'A modern storey block taking learning to greater heights.',
-    description: 'At Ondeyo Primary School, a modern storey block is giving learners more room to learn and teachers more space to build a stronger school day. It stands alongside a new generation of multi-storey classroom buildings taking shape across Sabatia’s public primary schools.',
-    story: "For the first time since Kenya attained independence, public primary schools in Sabatia Constituency are proudly hosting modern multi-storey classroom buildings — a historic milestone that has transformed the face of education.\n\nThese structures are more than architectural landmarks. Designed to maximize learning space and provide a modern educational environment, they have eased classroom congestion and created a setting where learners can thrive.\n\nWithin the last four years, landmark storey-building projects have been completed at Kivagala Primary School in North Maragoli Ward, Ondeyo Primary School in Izava-Lyaduywa Ward, Galoni Primary School in West Sabatia Ward, Mwilitsa Primary School in Busali Ward, Sabatia Primary School in Wodanga Ward, and Havuyiya Primary School in Chavakali Ward. Tsimbalo Primary School in Izava-Lyaduywa Ward remains ongoing.\n\nSeven storey buildings are represented in the story: six completed and one ongoing, across six wards.",
-    purpose: 'Expand learning space and strengthen the everyday classroom environment.',
+    excerpt: 'One constituency-wide story of modern multi-storey classrooms and expanded learning space.',
+    description: 'Across Sabatia, modern multi-storey classroom buildings are giving learners more room to learn and schools more space to grow. The combined story brings together the labeled storey-building projects documented across the supplied newsletter and photobook.',
+    story: "For the first time since Kenya attained independence, public primary schools in Sabatia Constituency are proudly hosting modern multi-storey classroom buildings — a historic milestone that has transformed the face of education.\n\nThese structures are more than architectural landmarks. Designed to maximize learning space and provide a modern educational environment, they have eased classroom congestion and created a setting where learners can thrive.\n\nWithin the last four years, landmark storey-building projects have been completed at Kivagala Primary School in North Maragoli Ward, Ondeyo Primary School in Izava-Lyaduywa Ward, Galoni Primary School in West Sabatia Ward, Mwilitsa Primary School in Busali Ward, Sabatia Primary School in Wodanga Ward, and Havuyiya Primary School in Chavakali Ward. Tsimbalo Primary School in Izava-Lyaduywa Ward remains ongoing.\n\nSeven storey buildings are represented in the story: six completed and one ongoing, across six wards. The photobook’s Storey Buildings spread also labels Bugina Secondary School, Kapsambo Primary School, Mwilitsa Primary School, Chandumba Secondary School, Kivagala Primary School, Igunga Girls Senior School laboratory, Munoywa Technical Lab, the Mukingi Secondary School water tower, Mululu Dormitory, and a section of Havuyiya Storey Building.",
+    purpose: 'Expand learning space, ease classroom congestion, and strengthen the everyday classroom environment across the constituency.',
     status: 'Completed / showcased',
-    images: ['photo-005.jpg', 'photo-006.jpg'],
+    images: ['photo-001.jpg', 'photo-004.jpg', 'photo-005.jpg', 'photo-006.jpg', 'photo-007.jpg', 'photo-008.jpg', 'photo-009.jpg', 'photo-010.jpg', 'photo-011.jpg', 'photo-013.jpg', 'photo-014.jpg', 'photo-015.jpg'],
     stats: ['Document statistic: 7 storey buildings', '6 completed / 1 ongoing', '6 wards represented'],
     source: 'Newsletter: “Historic Storey Classrooms”.'
-  },
-  {
-    slug: 'bugina-primary-school',
-    name: 'Bugina Primary School storey building',
-    location: 'Sabatia Constituency',
-    category: 'Education',
-    excerpt: 'A modern storey building transforming the learning environment.',
-    description: 'At Bugina Primary School, a modern storey building is changing the shape of the learning environment. Its new floors bring added classroom space to a school community ready to grow.',
-    purpose: 'Provide modern classroom accommodation for learners.',
-    status: 'Showcased in 2022–2026 materials',
-    images: ['photo-008.jpg', 'photo-009.jpg'],
-    source: 'Newsletter caption and photobook: “Storey Buildings”.'
   },
   {
     slug: 'chandumba-secondary-school',
@@ -56,30 +44,6 @@ export const projects = [
     status: 'Showcased in 2022–2026 materials',
     images: ['photo-010.jpg', 'photo-007.jpg'],
     source: 'Newsletter caption; photobook: “Chandumba students learning in their new classroom”.'
-  },
-  {
-    slug: 'kivagala-secondary-school',
-    name: 'Kivagala Secondary School classrooms',
-    location: 'Sabatia Constituency',
-    category: 'Education',
-    excerpt: 'Modern classrooms creating space for brighter learning.',
-    description: 'Kivagala Secondary School is opening up room for brighter learning with modern classrooms designed to meet the everyday needs of its students.',
-    purpose: 'Increase the quality and capacity of learning facilities.',
-    status: 'Showcased in 2022–2026 materials',
-    images: ['photo-011.jpg', 'photo-012.jpg'],
-    source: 'Newsletter caption and photobook: “Storey Buildings”.'
-  },
-  {
-    slug: 'mwilitsa-primary-school',
-    name: 'Mwilitsa Primary School modern classroom',
-    location: 'Sabatia Constituency',
-    category: 'Education',
-    excerpt: 'Modern classroom construction documented while work was ongoing.',
-    description: 'At Mwilitsa Primary School, a modern classroom is rising. The project was still under construction when these photographs were made, capturing a school in the middle of change.',
-    purpose: 'Expand classroom capacity as construction progresses.',
-    status: 'Ongoing construction when documented',
-    images: ['photo-013.jpg', 'photo-015.jpg'],
-    source: 'Newsletter: “Mwilitsa Primary, Ongoing Construction of Modern Classroom”.'
   },
   {
     slug: 'munoywa-technical-lab',
@@ -522,7 +486,7 @@ export const photos = photoFiles.map((file, index) => {
   }
 })
 
-export const featuredSlugs = ['sabatia-kmtc-kegondi', 'chavakali-eregi-road', 'loveyi-bridge', 'ondeyo-primary-school']
+export const featuredSlugs = ['sabatia-kmtc-kegondi', 'chavakali-eregi-road', 'loveyi-bridge', 'historic-storey-classroom-buildings']
 
 export const getProject = (slug) => projects.find((project) => project.slug === slug)
 export const getPhotosForProject = (project) => {

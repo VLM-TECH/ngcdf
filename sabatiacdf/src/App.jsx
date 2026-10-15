@@ -46,12 +46,13 @@ function LogoMark() {
 
 function SiteHeader() {
   const [open, setOpen] = useState(false)
-  const links = [['/', 'Home'], ['/about', 'About']]
+  const links = [['/', 'Home'], ['/projects', 'Projects'], ['/photobook', 'Photobook'], ['/newsletter', 'Newsletter'], ['/about', 'About']]
   return <header className="site-header">
     <div className="header-inner">
       <LogoMark />
       <nav className={`site-nav ${open ? 'is-open' : ''}`} aria-label="Primary navigation">
         {links.map(([href, label]) => <Link key={href} href={href} className="nav-link" onClick={() => setOpen(false)}>{label}</Link>)}
+        <Link href="/projects" className="nav-cta" onClick={() => setOpen(false)}>Explore archive <Icon name="arrow" size={16}/></Link>
       </nav>
       <button className="menu-button" type="button" onClick={() => setOpen((value) => !value)} aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open}><Icon name={open ? 'close' : 'menu'} /></button>
     </div>
@@ -62,7 +63,7 @@ function Footer() {
   return <footer className="site-footer">
     <div className="footer-main shell">
       <div className="footer-brand"><LogoMark /><p>A visual archive of the Sabatia NG-CDF development journey, built from The Sabatian 2022–2026 newsletter and photobook.</p></div>
-      <div className="footer-column"><span className="footer-label">Discover</span><Link href="/category/education">Education</Link><Link href="/category/infrastructure">Infrastructure</Link><Link href="/category/youth-and-sports">Youth &amp; Sports</Link></div>
+      <div className="footer-column"><span className="footer-label">Explore</span><Link href="/projects">All projects</Link><Link href="/photobook">Photo book</Link><Link href="/newsletter">Newsletter</Link></div>
       <div className="footer-column"><span className="footer-label">Context</span><Link href="/about">About Sabatia</Link><Link href="/contact">Contact</Link><a href="https://www.ngcdf.go.ke/" target="_blank" rel="noreferrer">NG-CDF website <Icon name="external" size={13}/></a></div>
     </div>
     <div className="footer-bottom shell"><span>© The Sabatian · NG-CDF Sabatia · 2022—2026</span><span>Source-led. Community-focused.</span></div>
@@ -115,13 +116,8 @@ function HomePage() {
         <div className="shell stats-grid">{highlights.map((item) => <div className="stat-item" key={item.value}><strong>{item.value}</strong><span>{item.label}</span><small>{item.note}</small></div>)}</div>
       </section>
 
-      <section className="shell section-pad category-section">
-        <SectionTitle eyebrow="02 / Explore Sabatia" title="Development, told through five themes." body="Choose a category to explore the projects, places, and people behind the story." />
-        <CategoryCards />
-      </section>
-
       <section className="shell section-pad featured-section">
-        <SectionTitle eyebrow="03 / Featured stories" title="Stories from the archive" body="Explore selected projects that show how investment becomes a safer crossing, a brighter classroom, or a new route to opportunity." action={<ArrowLink href="/projects">Browse all stories</ArrowLink>} />
+        <SectionTitle eyebrow="02 / The work" title="Four stories from the archive" body="Browse a selection of projects that show how investment becomes a safer crossing, a brighter classroom, or a new route to opportunity." action={<ArrowLink href="/projects">See the full project directory</ArrowLink>} />
         <div className="project-grid project-grid-featured">{featured.map((project, index) => <ProjectCard key={project.slug} project={project} featured={index === 0}/>)}</div>
       </section>
 
@@ -138,37 +134,6 @@ function HomePage() {
       </section>
     </main>
   </>
-}
-
-const categoryInfo = [
-  { title: 'Education', slug: 'education', match: ['Education'], desc: 'Classrooms, laboratories, bursaries, and better places to learn.', image: 'photo-005.jpg' },
-  { title: 'Security', slug: 'security', match: ['Security'], desc: 'Local administration, community safety, and public lighting.', image: 'photo-078.jpg' },
-  { title: 'Infrastructure', slug: 'infrastructure', match: ['Infrastructure', 'Electrification', 'Water', 'Housing & Trade'], desc: 'Roads, bridges, water, electricity, markets, and essential links.', image: 'photo-088.jpg' },
-  { title: 'Youth and Sports', slug: 'youth-and-sports', match: ['Youth & Sports'], desc: 'The Sloya Cup, youth talent, and community initiatives.', image: 'photo-101.jpg' },
-  { title: 'Healthcare', slug: 'healthcare', match: ['Health'], desc: 'Health training, facility access, and documented health interventions.', image: 'photo-074.jpg' }
-]
-
-function CategoryCards() {
-  return <div className="category-grid">{categoryInfo.map((item, index) => {
-    const count = projects.filter((project) => item.match.includes(project.category)).length
-    return <Link href={`/category/${item.slug}`} className="category-card" key={item.slug}>
-      <div className="category-card-image"><Image src={`/assets/photobook/${item.image}`} alt={`${item.title} projects in Sabatia`} /><span className="category-number">0{index + 1}</span><span className="category-explore">Explore <Icon name="arrow" size={16}/></span></div>
-      <div className="category-card-copy"><span>{count} archive {count === 1 ? 'story' : 'stories'}</span><h3>{item.title}</h3><p>{item.desc}</p></div>
-    </Link>
-  })}</div>
-}
-
-function CategoryPage({ slug }) {
-  const category = categoryInfo.find((item) => item.slug === slug)
-  if (!category) return <NotFound />
-  const items = projects.filter((project) => category.match.includes(project.category))
-  return <main className="page-main shell category-page">
-    <section className="page-hero"><div><Link href="/" className="back-link"><Icon name="arrow" size={16}/> Home</Link><Eyebrow>Sabatia development stories</Eyebrow><h1>{category.title}</h1><p>{category.desc} Browse the documented projects and open any story for its source details and photographs.</p></div><div className="page-hero-note"><strong>{items.length}</strong><span>related stories</span><small>From the supplied Sabatian newsletter and photobook.</small></div></section>
-    <section className="category-intro"><p>Explore {category.title.toLowerCase()} projects documented across Sabatia Constituency. Story details are kept close to the available source material; missing information is not guessed.</p></section>
-    <div className="directory-summary"><span><strong>{items.length}</strong> {items.length === 1 ? 'story' : 'stories'}</span><span>Photographs and source notes included where available</span></div>
-    <section className="project-grid directory-grid">{items.map((project) => <ProjectCard project={project} key={project.slug}/>)}</section>
-    <div className="category-back"><ArrowLink href="/">Explore all categories</ArrowLink></div>
-  </main>
 }
 
 function ProjectsPage() {
@@ -196,7 +161,7 @@ function ProjectPage({ slug }) {
   const lead = projectPhotos[0]
   return <main className="project-page">
     <section className="project-hero shell"><div className="project-hero-copy"><Link href="/projects" className="back-link"><Icon name="arrow" size={16}/> Back to all projects</Link><Eyebrow>{project.category} · Project story</Eyebrow><h1>{project.name}</h1><p className="project-lede">{project.excerpt}</p><div className="project-meta-list"><span><Icon name="pin" size={15}/>{project.location}</span><span><Icon name="calendar" size={15}/>{project.status}</span></div></div><div className="project-hero-image">{lead ? <Image src={lead.src} alt={lead.caption}/> : <div className="image-placeholder"><Icon name="image" size={32}/></div>}<span className="image-label">Source photograph · {lead?.source || 'The Sabatian'}</span></div></section>
-    <section className="project-body shell"><div className="story-rail"><span>Archive entry</span><strong>{String(projects.indexOf(project) + 1).padStart(2, '0')}</strong><span>{project.category}</span></div><div className="story-content"><div className="story-intro"><p>{project.description}</p>{project.stats && <div className="project-stat-row">{project.stats.map((stat) => <span key={stat}>{stat}</span>)}</div>}{project.story && <div className="story-longform"><Eyebrow>Full story</Eyebrow>{project.story.split('\n\n').map((paragraph, index) => <p key={index}>{paragraph}</p>)}</div>}{project.testimonials && <div className="story-testimonials"><Eyebrow>Voices from the story</Eyebrow>{project.testimonials.map((quote) => <blockquote key={quote}>{quote}</blockquote>)}</div>}</div><div className="story-columns"><div><Eyebrow>Why it matters</Eyebrow><h2>{project.purpose}</h2></div><div><p>Every story here stays close to the ground: the places, people, and outcomes that the supplied materials make clear. Where a detail is not available, we leave it out rather than fill the gap.</p><p className="source-note">Source note: {project.source}</p></div></div>{projectPhotos.length > 0 && <div className="project-gallery"><div className="gallery-heading"><Eyebrow>Supporting photographs</Eyebrow><span>{projectPhotos.length} source {projectPhotos.length === 1 ? 'image' : 'images'}</span></div><div className="project-gallery-grid">{projectPhotos.map((photo) => <Image key={photo.id} src={photo.src} alt={photo.caption}/>)}</div></div>}</div></section>
+    <section className="project-body shell"><div className="story-rail"><span>Archive entry</span><strong>{String(projects.indexOf(project) + 1).padStart(2, '0')}</strong><span>{project.category}</span></div><div className="story-content"><div className="story-intro"><p>{project.description}</p>{project.stats && <div className="project-stat-row">{project.stats.map((stat) => <span key={stat}>{stat}</span>)}</div>}{project.story && <div className="story-longform"><Eyebrow>Full story</Eyebrow>{project.story.split('\n\n').map((paragraph, index) => <p key={index}>{paragraph}</p>)}</div>}{project.testimonials && <div className="story-testimonials"><Eyebrow>Voices from the story</Eyebrow>{project.testimonials.map((quote) => <blockquote key={quote}>{quote}</blockquote>)}</div>}</div><div className="story-columns story-columns-single"><div><Eyebrow>Why it matters</Eyebrow><h2>{project.purpose}</h2></div></div>{projectPhotos.length > 0 && <div className="project-gallery"><div className="gallery-heading"><Eyebrow>Supporting photographs</Eyebrow><span>{projectPhotos.length} source {projectPhotos.length === 1 ? 'image' : 'images'}</span></div><div className="project-gallery-grid">{projectPhotos.map((photo) => <Image key={photo.id} src={photo.src} alt={photo.caption}/>)}</div></div>}</div></section>
     {related.length > 0 && <section className="shell related-section"><SectionTitle eyebrow="Continue the story" title={`More in ${project.category.toLowerCase()}`} action={<ArrowLink href="/projects">Back to directory</ArrowLink>}/><div className="project-grid">{related.map((item) => <ProjectCard key={item.slug} project={item}/>)}</div></section>}
   </main>
 }
@@ -237,12 +202,10 @@ export default function App() {
   const [path, setPath] = useState(window.location.pathname)
   useEffect(() => { const update = () => setPath(window.location.pathname); window.addEventListener('popstate', update); return () => window.removeEventListener('popstate', update) }, [])
   const projectMatch = path.match(/^\/projects\/([^/]+)\/?$/)
-  const categoryMatch = path.match(/^\/category\/([^/]+)\/?$/)
   let page = <NotFound />
   if (path === '/' || path === '') page = <HomePage />
   else if (path === '/projects' || path === '/projects/') page = <ProjectsPage />
   else if (projectMatch) page = <ProjectPage slug={projectMatch[1]} />
-  else if (categoryMatch) page = <CategoryPage slug={categoryMatch[1]} />
   else if (path === '/photobook' || path === '/photobook/') page = <PhotoBookPage />
   else if (path === '/newsletter' || path === '/newsletter/') page = <NewsletterPage />
   else if (path === '/about' || path === '/about/') page = <AboutPage />

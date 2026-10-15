@@ -1,0 +1,36 @@
+{
+  "routes": [
+    {
+      "path": "/",
+      "title": "Home \u2014 The Sabatian"
+    },
+    {
+      "path": "/projects",
+      "title": "All Projects \u2014 The Sabatian"
+    },
+    {
+      "path": "/projects/:slug",
+      "title": "Project Story \u2014 The Sabatian"
+    },
+    {
+      "path": "/category/:slug",
+      "title": "Project Category \u2014 The Sabatian"
+    },
+    {
+      "path": "/photobook",
+      "title": "Photobook \u2014 The Sabatian"
+    },
+    {
+      "path": "/newsletter",
+      "title": "Newsletter \u2014 The Sabatian"
+    },
+    {
+      "path": "/about",
+      "title": "About \u2014 The Sabatian"
+    },
+    {
+      "path": "/contact",
+      "title": "Contact \u2014 The Sabatian"
+    }
+  ]
+}
